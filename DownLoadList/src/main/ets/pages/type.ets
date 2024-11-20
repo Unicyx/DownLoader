@@ -7,7 +7,7 @@ export class Task implements NameUrl {
   name: string = ''
   url: string
   downloaded: number = 0
-  total: number = 0
+  total: number = -1
   status?: string
 
   constructor(name: string, url: string) {

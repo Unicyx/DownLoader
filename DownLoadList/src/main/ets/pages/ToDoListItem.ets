@@ -26,7 +26,7 @@ export struct ToDoListItem {
       }
       // todo:  展示toDoItem，下载进度
       Text(this.taskItem.name)
-      Text(` progress: ${!this.taskItem.total ? '连接中...' : `${this.taskItem.downloaded / this.taskItem.total *
+      Text(` progress: ${this.taskItem.total == -1 ? '连接中...' : `${this.taskItem.downloaded / this.taskItem.total *
         100}% (${this.taskItem.downloaded}/${this.taskItem.total})`}`)
     }
     // .width('100%')
