@@ -1,0 +1,79 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/babybus/.ohos/config/default_MyApplication_rovPVM-zDAwjBPC1l1-3a_ADjVMBhHHNMKAOhKFNZAE=.cer",
+          "storePassword": "0000001B4B3385B31C38AE0925372D122BC012340D315DA58D3FFBA219E8576D42330D2DECDA70D5681DD4",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001BC3AFE9A2DDBB06350AEEDADFE636FDB30B439DEF87B2EE3D4EF37AC1B4468997FFA2E25F2F7812",
+          "profile": "/Users/babybus/.ohos/config/default_MyApplication_rovPVM-zDAwjBPC1l1-3a_ADjVMBhHHNMKAOhKFNZAE=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/babybus/.ohos/config/default_MyApplication_rovPVM-zDAwjBPC1l1-3a_ADjVMBhHHNMKAOhKFNZAE=.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "relativeTest",
+      "srcPath": "./relativeTest",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DownLoadList",
+      "srcPath": "./DownLoadList",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}

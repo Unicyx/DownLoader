@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "DownLoadListAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "DownLoadListAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "reason_network",
+      "value": "download"
+    }
+  ]
+}
