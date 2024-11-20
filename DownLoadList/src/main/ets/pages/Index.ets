@@ -14,11 +14,11 @@ export struct ToDoList {
   @State selectedItems: Task[] = []
   downLoadUrl: NameUrl[] = [{ name: '450*450', url: 'https://via.placeholder.com/450' },
     {
-      name: '大尺寸风景',
+      name: '风景',
       url: 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3ODB8MHwxfGFsbHwxfHx8fHx8fHwxNjI1MzYwNDg3&ixlib=rb-1.2.1&q=80&w=1080'
     },
     {
-      name: '大尺寸动物',
+      name: '动物',
       url: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3ODB8MHwxfGFsbHwyfHx8fHx8fHwxNjI1MzYwNTc0&ixlib=rb-1.2.1&q=80&w=1080'
     },
     { name: 'mp3', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' }
