@@ -13,9 +13,16 @@ export struct ToDoList {
   @Watch('onEditModeChange') @State isEditMode: boolean = false
   @State selectedItems: Task[] = []
   downLoadUrl: NameUrl[] = [{ name: '450*450', url: 'https://via.placeholder.com/450' },
-    { name: 'pdf', url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf' },
-    { name: 'zip', url: 'https://www.sample-videos.com/zip/10mb.zip' },
-    { name: 'mp3', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' }]
+    {
+      name: '大尺寸风景',
+      url: 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3ODB8MHwxfGFsbHwxfHx8fHx8fHwxNjI1MzYwNDg3&ixlib=rb-1.2.1&q=80&w=1080'
+    },
+    {
+      name: '大尺寸动物',
+      url: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3ODB8MHwxfGFsbHwyfHx8fHx8fHwxNjI1MzYwNTc0&ixlib=rb-1.2.1&q=80&w=1080'
+    },
+    { name: 'mp3', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' }
+  ]
 
   onEditModeChange() {
     if (!this.isEditMode) {
@@ -50,6 +57,20 @@ export struct ToDoList {
     })
   }
 
+  downLoad(nameUrl: NameUrl) {
+    const task = this.tasks.find(task => task.url === nameUrl.url)
+    if (task) {
+      promptAction.showToast({
+        message: '任务已存在'
+      })
+    } else {
+      downloadManager.addTask(nameUrl.name, nameUrl.url)
+      const downloader = new DownLoader(this.listener)
+      downloader.downloadFile(nameUrl.url)
+      this.renderTasks()
+    }
+  }
+
   build() {
     Column() {
       Row() {
@@ -77,6 +98,13 @@ export struct ToDoList {
             .fontSize(36)
             .margin({ left: 40 })
           Blank()
+          Button('全部下载')
+            .margin({ right: 20 })
+            .onClick(() => {
+              for (let i of this.downLoadUrl) {
+                this.downLoad(i)
+              }
+            })
           Text('+')
             .fontSize(36)
             .margin({ right: 40 })
@@ -86,22 +114,7 @@ export struct ToDoList {
                 onAccept: (value: TextPickerResult) => {
                   let arr = Array.isArray(value.index) ? value.index : [value.index];
                   for (let i = 0; i < arr.length; i++) {
-
-                    const task = this.tasks.find(task => task.url === this.downLoadUrl[arr[i]].url)
-                    if (task) {
-                      promptAction.showToast({
-                        message: '任务已存在'
-                      })
-                    } else {
-                      downloadManager.addTask(this.downLoadUrl[arr[i]].name, this.downLoadUrl[arr[i]].url)
-                      const downloader = new DownLoader(this.listener)
-                      downloader.downloadFile(this.downLoadUrl[arr[i]].url)
-                      this.renderTasks()
-                    }
-                    // 废弃的
-                    // this.tasks.push(new Task(this.downLoadUrl[arr[i]].name, this.downLoadUrl[arr[i]].url));
-                    // const downloader = new DownLoader(listener)
-                    // downloader.downloadFile(this.downLoadUrl[arr[i]].url)
+                    this.downLoad(this.downLoadUrl[arr[i]])
                   }
                 },
               })

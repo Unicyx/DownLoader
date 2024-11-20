@@ -1,7 +1,6 @@
 import { common } from '@kit.AbilityKit';
 import fs from '@ohos.file.fs';
 import { BusinessError, request } from '@kit.BasicServicesKit';
-import { buffer } from '@kit.ArkTS';
 import { DownloaderListener } from './type';
 
 export class DownLoader {
@@ -16,25 +15,22 @@ export class DownLoader {
   downloadFile(url: string): void {
     try {
       this.listener.onPending?.(url)
+      const urlParts = url.split('/')
+      const fileName = urlParts[urlParts.length - 1] // 获取 URL 的最后一部分作为文件名
+      const path = this.context.filesDir + '/' + fileName
+
       // 判断文件是否存在，存在就删除
-      let path = this.context.filesDir + '/test.png'
       if (fs.accessSync(path)) {
         fs.unlinkSync(path)
       }
       this.listener.onStart?.(url)
       request.downloadFile(this.context, {
         url: url,
-        filePath: this.filesDir + '/test.png'
+        filePath: path
       })
         .then((downloadTask: request.DownloadTask) => {
           downloadTask.on('complete', () => {
             this.listener.onCompleted?.(url)
-            let file = fs.openSync(this.filesDir + '/test.png', fs.OpenMode.READ_WRITE)
-            let arrayBuffer = new ArrayBuffer(1024)
-            let readLen = fs.readSync(file.fd, arrayBuffer)
-            let buf = buffer.from(arrayBuffer, 0, readLen)
-
-            fs.closeSync(file)
           })
           downloadTask.on('progress', (downloaded, total) => {
             this.listener.onProgress?.(downloaded, total, url)

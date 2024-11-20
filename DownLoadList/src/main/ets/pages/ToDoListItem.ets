@@ -5,8 +5,6 @@ import { Task } from './type';
 export struct ToDoListItem {
   @Link isEditMode: boolean
   @Link selectedItems: Task[]
-  // isDownLoading: boolean = false
-  // downLoadingSuccess: boolean = false
   @Prop taskItem: Task
 
   build() {
@@ -26,8 +24,9 @@ export struct ToDoListItem {
       }
       // todo:  展示toDoItem，下载进度
       Text(this.taskItem.name)
-      Text(` progress: ${this.taskItem.total == -1 ? '连接中...' : `${this.taskItem.downloaded / this.taskItem.total *
-        100}% (${this.taskItem.downloaded}/${this.taskItem.total})`}`)
+      Text(` progress: ${!this.taskItem.total ? '连接中...' :
+        `${this.taskItem.downloaded / this.taskItem.total *
+          100}% (${this.taskItem.downloaded}/${this.taskItem.total})`}`)
     }
     // .width('100%')
     .height(60)
