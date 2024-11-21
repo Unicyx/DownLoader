@@ -1,4 +1,3 @@
-//ToDo.ets
 import { util } from '@kit.ArkTS'
 
 @Observed
